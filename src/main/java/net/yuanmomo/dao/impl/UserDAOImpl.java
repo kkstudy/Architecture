@@ -88,15 +88,15 @@ public class UserDAOImpl implements UserMapper{
 	 */
 	@Override
 	public int insert(User record) throws DefaultDAOException  {
-		System.out.println("DAO的实现层，简单的数据库读取和写入操作\n\t可能抛出sql默认异常\n\t可能抛出某些自定义的dao异常");
+		System.out.println("DAO的实现层，简单的数据库读取和写入操作\n\t可能抛出sql默认异常\n\t可能抛出自定义的dao异常");
 		try {
 			int count = this.userMapper.insertSelective(record);
 			if(count <= 0){
-				throw new InsertFailedDAOException("INSERT_OBJECT_FAILED_ERROR","Insert Object Error, the Object User is "+record);
+				throw new DefaultDAOException("INSERT_USER_FAILED_ERROR","Insert Object Error, the Object User is "+record);
 			}
 			return count;
 		} catch (Exception e) {
-			throw new DefaultDAOException(e);
+			throw new DefaultDAOException(e,record.toString());
 		}
 	}
 
@@ -127,7 +127,7 @@ public class UserDAOImpl implements UserMapper{
 		try {
 			return this.userMapper.selectByExample(example);
 		} catch (Exception e) {
-			throw new DefaultDAOException(e);
+			throw new DefaultDAOException(e,example.toString());
 		}
 	}
 
