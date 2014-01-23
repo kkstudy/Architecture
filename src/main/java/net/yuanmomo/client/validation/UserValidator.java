@@ -21,6 +21,10 @@ package net.yuanmomo.client.validation;
  * @since      JDK 1.6
  * @see 	 
  */
-public class Validator {
-
+public class UserValidator {
+	public boolean checkUser(String user){
+		if(user == null){
+			throw new Exception("","");
+		}
+	}
 }

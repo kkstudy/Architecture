@@ -16,6 +16,7 @@ import java.util.List;
 import net.yuanmomo.dao.mapper.UserMapper;
 import net.yuanmomo.dao.vo.User;
 import net.yuanmomo.dao.vo.UserCriteria;
+import net.yuanmomo.service.exception.DefaultServiceException;
 import net.yuanmomo.service.exception.ItemNotUniqueDAOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,24 +38,43 @@ public class UserService {
 	@Autowired
 	private UserMapper UserDAOImpl;
 	
-	public User getUser(String name){
+	/**
+	 * getUser: 查找指定用户名的用户. <br/>
+	 *
+	 * @author Hongbin Yuan
+	 * @param name
+	 * @return
+	 * @throws DefaultServiceException
+	 * @since JDK 1.6
+	 */
+	public User getUser(String name) throws DefaultServiceException{
 		try {
 			UserCriteria params = new UserCriteria();
 			params.createCriteria().andNameEqualTo(name);
 			List<User> userList = this.UserDAOImpl.selectByExample(params);
 			if(userList != null && userList.size() >1){
-				throw new ItemNotUniqueDAOException("");
+				throw new ItemNotUniqueDAOException("MULTI_OBJECT_FOUND","The result size is "+userList.size());
 			}
+			return userList.get(0);
 		} catch (Exception e) {
-			
+			throw new DefaultServiceException(e);
 		}
 	}
 	
-	public void insert(User user){
+	/**
+	 * insert: 插入一个新的用户. <br/>
+	 *
+	 * @author Hongbin Yuan
+	 * @param user
+	 * @throws DefaultServiceException 
+	 * @since JDK 1.6
+	 */
+	public boolean insert(User user) throws DefaultServiceException{
 		try {
-			
+			int count = this.UserDAOImpl.insert(user);
+			return count  == 1 ? true : false;
 		} catch (Exception e) {
-
+			throw new DefaultServiceException(e);
 		}
 	}
 	/**

@@ -74,4 +74,10 @@ public class User implements Serializable {
         result = prime * result + ((getBirthday() == null) ? 0 : getBirthday().hashCode());
         return result;
     }
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", age=" + age
+				+ ", birthday=" + birthday + "]";
+	}
 }

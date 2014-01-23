@@ -26,10 +26,10 @@ package net.yuanmomo.service.exception;
 public class ItemNotUniqueDAOException extends DefaultServiceException{
 
 	/**
-	 * serialVersionUID:TODO.
+	 * serialVersionUID:TODO .
 	 * @since JDK 1.6
 	 */
-	private static final long serialVersionUID = 2678899844315428999L;
+	private static final long serialVersionUID = 4234099845955207551L;
 
 	/**
 	 * Creates a new instance of InsertFailedDAOException.

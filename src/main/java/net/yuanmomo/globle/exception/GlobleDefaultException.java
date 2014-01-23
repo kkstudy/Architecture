@@ -29,22 +29,18 @@ public class GlobleDefaultException extends Exception{
 	 */
 	private static final long serialVersionUID = 4637076834192093989L;
 	
-	
-	/**
-	 * id: 异常的编号.不同类型的异常，属于不同的范围
-	 * @since JDK 1.6
-	 */
-	private int id;
 	/**
 	 * code: 异常的错误编码.
 	 * @since JDK 1.6
 	 */
 	private String code;
+	
 	/**
 	 * info: 发生异常处的详细信息.
 	 * @since JDK 1.6
 	 */
 	private String detail;
+	
 	/**
 	 * message: 该异常的描述信息.
 	 * @since JDK 1.6
@@ -56,11 +52,13 @@ public class GlobleDefaultException extends Exception{
 	 * @since JDK 1.6
 	 */
 	private int fixId;
+	
 	/**
 	 * fixInfo:该异常的解决方案详细信息.
 	 * @since JDK 1.6
 	 */
 	private String fixInfo;
+	
 	/*
 	 * 有其它的一些错误信息
 	 * 
@@ -77,24 +75,20 @@ public class GlobleDefaultException extends Exception{
 		this.code = code;
 		this.detail = detail;
 	}
+	
 	/**
-	 * id.
-	 *
-	 * @return  the id
-	 * @since   JDK 1.6
+	 * Creates a new instance of GlobleDefaultException.
+	 * <p>Title: </p>
+	 * <p>Description: </p>
+	 * @param exception
+	 * @param detail
 	 */
-	public int getId() {
-		return id;
+	public GlobleDefaultException(Exception exception,String detail) {
+		super();
+		this.message = exception.getMessage();
+		this.detail = detail;
 	}
-	/**
-	 * id.
-	 *
-	 * @param   id    the id to set
-	 * @since   JDK 1.6
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
+
 	/**
 	 * detail.
 	 *
@@ -122,7 +116,7 @@ public class GlobleDefaultException extends Exception{
 	 */
 	@Override
 	public String toString() {
-		return "GlobleDefaultException [id=" + id + ", code=" + code
+		return "GlobleDefaultException [code=" + code
 				+ ", detail=" + detail + ", message=" + message + ", fixId="
 				+ fixId + ", fixInfo=" + fixInfo + "]";
 	}

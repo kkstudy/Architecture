@@ -1,6 +1,6 @@
 package net.yuanmomo;
 
-import net.yuanmomo.business.TestBusiness;
+import net.yuanmomo.business.UserBusiness;
 import net.yuanmomo.dao.mapper.vo.TestBean;
 
 import org.junit.After;
@@ -11,7 +11,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class BasicTest {
 	 protected BeanFactory beanFactory = null;
-	    protected TestBusiness testBusiness = null;
+	    protected UserBusiness testBusiness = null;
 
 	    @Before
 	    public void setUp() throws Exception {
@@ -21,7 +21,7 @@ public class BasicTest {
 	        // );
 	        // 相对路径
 	        beanFactory = new ClassPathXmlApplicationContext("config/ApplicationContext.xml");
-	        testBusiness =  beanFactory.getBean(TestBusiness.class);
+	        testBusiness =  beanFactory.getBean(UserBusiness.class);
 	    }
 
 	    @After

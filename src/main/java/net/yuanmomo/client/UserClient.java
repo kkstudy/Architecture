@@ -11,6 +11,8 @@
 
 package net.yuanmomo.client;
 
+import net.yuanmomo.dao.vo.User;
+
 import org.springframework.stereotype.Service;
 
 /**
@@ -25,6 +27,20 @@ import org.springframework.stereotype.Service;
  * @see 	 
  */
 @Service
-public class UserClient {
-	public 
+public class UserClient{
+	private 
+	
+	/**
+	 * addUser: 注册一个新用户. <br/>
+	 *
+	 * @author Hongbin Yuan
+	 * @param u
+	 * @return
+	 * @since JDK 1.6
+	 */
+	public boolean addUser(User u){
+		// 判断当前操作用户权限
+		// 校验数据
+		
+	}
 }

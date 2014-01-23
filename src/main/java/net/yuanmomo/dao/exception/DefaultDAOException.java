@@ -27,10 +27,10 @@ import net.yuanmomo.globle.exception.GlobleDefaultException;
 public class DefaultDAOException extends GlobleDefaultException{
 
 	/**
-	 * serialVersionUID:TODO.
+	 * serialVersionUID:TODO .
 	 * @since JDK 1.6
 	 */
-	private static final long serialVersionUID = 2678899844315428999L;
+	private static final long serialVersionUID = -7880895775084353070L;
 
 	/**
 	 * Creates a new instance of DefaultDAOException.
@@ -40,10 +40,8 @@ public class DefaultDAOException extends GlobleDefaultException{
 	 * @param code
 	 * @param message
 	 */
-	public DefaultDAOException(Exception exception) {
-		// 数据库dao层应该配置一个默认的错误id，错误编码
-		// super(defalult_id, default_code, message);
-		super("DATA_ACCESS_DEFAULT_ERROR", exception.getMessage());
+	public DefaultDAOException(Exception exception,String detail) {
+		super(exception.getMessage(), detail);
 	}
 
 	/**

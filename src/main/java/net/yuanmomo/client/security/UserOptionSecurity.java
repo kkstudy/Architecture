@@ -10,6 +10,9 @@
  */
 
 package net.yuanmomo.client.security;
+
+import net.yuanmomo.client.security.exception.OptionUnauthorisedException;
+
 /**
  * ClassName : Security 
  * Function  : TODO ADD FUNCTION. 
@@ -21,6 +24,13 @@ package net.yuanmomo.client.security;
  * @since      JDK 1.6
  * @see 	 
  */
-public class Security {
-
+public class UserOptionSecurity {
+	public boolean check(int optionId) throws OptionUnauthorisedException{
+		System.out.println("Client 层中，先调用权限检查，没有权限将抛出异常");
+		boolean flag = false;
+		if(flag){
+			throw new OptionUnauthorisedException("Option_"+optionId+"_Unauthorised","This option is Unauthorised" + optionId);
+		}
+		return true;
+	}
 }

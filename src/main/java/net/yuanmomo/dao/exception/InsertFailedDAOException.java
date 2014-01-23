@@ -26,10 +26,10 @@ package net.yuanmomo.dao.exception;
 public class InsertFailedDAOException extends DefaultDAOException{
 
 	/**
-	 * serialVersionUID:TODO.
+	 * serialVersionUID:TODO .
 	 * @since JDK 1.6
 	 */
-	private static final long serialVersionUID = 2678899844315428999L;
+	private static final long serialVersionUID = -2473731037496316651L;
 
 	/**
 	 * Creates a new instance of InsertFailedDAOException.

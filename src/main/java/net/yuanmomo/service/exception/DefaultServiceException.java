@@ -27,10 +27,10 @@ import net.yuanmomo.globle.exception.GlobleDefaultException;
 public class DefaultServiceException extends GlobleDefaultException{
 
 	/**
-	 * serialVersionUID:TODO.
+	 * serialVersionUID:TODO .
 	 * @since JDK 1.6
 	 */
-	private static final long serialVersionUID = 2678899844315428999L;
+	private static final long serialVersionUID = 2785330390054754514L;
 
 	/**
 	 * Creates a new instance of DefaultServiceException.
@@ -42,10 +42,10 @@ public class DefaultServiceException extends GlobleDefaultException{
 	 */
 	public DefaultServiceException(Exception exception) {
 		// service层应该配置一个默认的错误id，错误编码
-		// super(defalult_id, default_code, message);
-		super("SERVICE_DATA_ERROR", exception.getMessage());
+		// super(default_code, message);
+		super("SERVICE_ERROR", exception.getMessage());
 	}
-	
+
 	/**
 	 * Creates a new instance of DefaultServiceException.
 	 * <p>Title: </p>
@@ -53,7 +53,8 @@ public class DefaultServiceException extends GlobleDefaultException{
 	 * @param code
 	 * @param detail
 	 */
-	public DefaultDAOException(String code, String detail) {
+	public DefaultServiceException(String code, String detail) {
 		super(code, detail);
+		// TODO Auto-generated constructor stub
 	}
 }
