@@ -1,7 +1,7 @@
 
 /**
  * Project Name : Architecture
- * File Name    : DefaultDAOException.java
+ * File Name    : DAOException.java
  * Package Name : net.yuanmomo.dao.exception
  * Created on   : 2014-1-23下午5:47:12
  * Author       : Hongbin Yuan
@@ -9,11 +9,11 @@
  * Company      : 成都逗溜网科技有限公司  
  */
 
-package net.yuanmomo.service.exception;
+package net.yuanmomo.exception;
 
 
 /**
- * ClassName : DefaultDAOException 
+ * ClassName : DAOException 
  * Function  : TODO ADD FUNCTION. 
  * Reason    : TODO ADD REASON. 
  * Date      : 2014-1-23 下午5:47:12 
@@ -23,21 +23,22 @@ package net.yuanmomo.service.exception;
  * @since      JDK 1.6
  * @see 	 
  */
-public class ItemNotUniqueDAOException extends DefaultServiceException{
+public class DAOException extends GlobleException{
 
 	/**
 	 * serialVersionUID:TODO .
 	 * @since JDK 1.6
 	 */
-	private static final long serialVersionUID = 4234099845955207551L;
+	private static final long serialVersionUID = -7880895775084353070L;
 
 	/**
-	 * Creates a new instance of InsertFailedDAOException.
+	 * Creates a new instance of DAOException.
 	 * <p>Title: </p>
 	 * <p>Description: </p>
 	 * @param code
+	 * @param detail
 	 */
-	public ItemNotUniqueDAOException(String code,String detail) {
+	public DAOException(String code, String detail) {
 		super(code, detail);
 	}
 }

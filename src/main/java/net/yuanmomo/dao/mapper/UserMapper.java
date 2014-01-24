@@ -2,31 +2,32 @@ package net.yuanmomo.dao.mapper;
 
 import java.util.List;
 
-import net.yuanmomo.dao.exception.DefaultDAOException;
 import net.yuanmomo.dao.vo.User;
 import net.yuanmomo.dao.vo.UserCriteria;
+import net.yuanmomo.exception.DAOException;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
-    int countByExample(UserCriteria example) throws DefaultDAOException ;
+    public int  countByExample(UserCriteria example) throws DAOException,Exception ;
 
-    int deleteByExample(UserCriteria example) throws DefaultDAOException;
+    public int  deleteByExample(UserCriteria example) throws DAOException,Exception;
 
-    int deleteByPrimaryKey(Integer id) throws DefaultDAOException;
+    public int  deleteByPrimaryKey(Integer id) throws DAOException,Exception;
 
-    int insert(User record) throws DefaultDAOException;
+    public int  insert(User record) throws DAOException,Exception;
 
-    int insertSelective(User record) throws DefaultDAOException;
+    public int  insertSelective(User record) throws DAOException,Exception;
 
-    List<User> selectByExample(UserCriteria example) throws DefaultDAOException;
+    public List<User> selectByExample(UserCriteria example) throws DAOException,Exception;
 
-    User selectByPrimaryKey(Integer id) throws DefaultDAOException;
+    public User selectByPrimaryKey(Integer id) throws DAOException,Exception;
 
-    int updateByExampleSelective(@Param("record") User record, @Param("example") UserCriteria example) throws DefaultDAOException;
+    public int  updateByExampleSelective(@Param("record") User record, @Param("example") UserCriteria example) throws DAOException,Exception;
 
-    int updateByExample(@Param("record") User record, @Param("example") UserCriteria example) throws DefaultDAOException;
+    public int  updateByExample(@Param("record") User record, @Param("example") UserCriteria example) throws DAOException,Exception;
 
-    int updateByPrimaryKeySelective(User record) throws DefaultDAOException;
+    public int  updateByPrimaryKeySelective(User record) throws DAOException,Exception;
 
-    int updateByPrimaryKey(User record) throws DefaultDAOException;
+    public int  updateByPrimaryKey(User record) throws DAOException,Exception;
 }

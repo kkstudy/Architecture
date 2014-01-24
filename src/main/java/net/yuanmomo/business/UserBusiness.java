@@ -1,9 +1,10 @@
 package net.yuanmomo.business;
 
-import net.yuanmomo.business.exception.DefaultBusinessException;
-import net.yuanmomo.business.exception.ObjectExistsException;
+import net.yuanmomo.dao.proxy.UserImplProxy;
 import net.yuanmomo.dao.vo.User;
-import net.yuanmomo.service.UserService;
+import net.yuanmomo.exception.BusinessException;
+import net.yuanmomo.exception.ValidationException;
+import net.yuanmomo.resource.ResourceParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserBusiness{
 	
 	@Autowired
-	private UserService userService=null;
+	private UserImplProxy userImplProxy=null;
 
 	/**
 	 * addUser: 插入一个用户. <br/>
@@ -27,21 +28,36 @@ public class UserBusiness{
 	 * @since JDK 1.6
 	 */
 	@Transactional(propagation=Propagation.REQUIRED,isolation =Isolation.REPEATABLE_READ, rollbackFor = Exception.class)
-	public boolean addUser(User user) throws Exception {
-		try {
-			// 先判断用户名是否已经存在
-			User u = this.userService.getUser(user.getName());
-			
-			if(u!=null){
-				throw new ObjectExistsException("OBJECT_EXISTS", "This objec of "+ user.getName() +" exists.");
-			}
-			return this.userService.insert(user);
-		} catch (Exception e) {
-			throw new DefaultBusinessException(e);
+	public boolean addUser(User user) throws ValidationException,BusinessException,Exception {
+		System.out.println("Business层业务逻辑处理层，进行数据校验，根据业务逻辑调用Proxy层。");
+		
+		// 校验用户数据
+		if(user == null){
+			throw new ValidationException(ResourceParam.VALIDATION_USER_NULL,"User");
 		}
+		if(user.getName() == null || "".equals(user.getName().trim())){
+			throw new ValidationException(ResourceParam.VALIDATION_USER_NAME_ILLEGAL,"user.name="+user.getName());
+		}
+		if(user.getAge() == null || user.getAge()<=0 || user.getAge()>=200){
+			throw new ValidationException(ResourceParam.VALIDATION_USER_AGE_ILLEGAL,"user.age="+user.getAge());
+		}
+		
+		// 判断用户名是否已经存在
+		User u = this.userImplProxy.getUser(user.getName());
+		
+		if(u!=null){
+			throw new BusinessException(ResourceParam.BUSINESS_USER_NAME_EXISTS, "user.getName=" + user.getName());
+		}
+		return this.userImplProxy.insert(user);
 	}
 
-	public void setUserService(UserService userService) {
-		this.userService = userService;
+	/**
+	 * userImplProxy.
+	 *
+	 * @param   userImplProxy    the userImplProxy to set
+	 * @since   JDK 1.6
+	 */
+	public void setUserImplProxy(UserImplProxy userImplProxy) {
+		this.userImplProxy = userImplProxy;
 	}
 }

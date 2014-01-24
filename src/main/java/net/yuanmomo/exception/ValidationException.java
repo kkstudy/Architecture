@@ -2,7 +2,7 @@
  * Project Name : Architecture
  * Package Name : net.yuanmomo.client.validation.exception
  * Created on   : 2014-1-23下午10:37:01
- * File Name    : ValidationFailedException.java
+ * File Name    : ValidationException.java
  *
  * Author       : Hongbin Yuan
  * Blog         : yuanmomo.net
@@ -10,7 +10,7 @@
  */
 /**
  * Project Name : Architecture
- * File Name    : ValidationFailedException.java
+ * File Name    : ValidationException.java
  * Package Name : net.yuanmomo.client.validation.exception
  * Created on   : 2014-1-23下午10:37:01
  * Author       : Hongbin Yuan
@@ -18,12 +18,11 @@
  * Company      : 成都逗溜网科技有限公司  
  */
 
-package net.yuanmomo.client.validation.exception;
+package net.yuanmomo.exception;
 
-import net.yuanmomo.globle.exception.GlobleDefaultException;
 
 /**
- * ClassName : ValidationFailedException 
+ * ClassName : ValidationException 
  * Function  : TODO ADD FUNCTION. 
  * Reason    : TODO ADD REASON. 
  * Date      : 2014-1-23 下午10:37:01 
@@ -33,21 +32,22 @@ import net.yuanmomo.globle.exception.GlobleDefaultException;
  * @since      JDK 1.6
  * @see 	 
  */
-public class ValidationFailedException extends GlobleDefaultException{
+public class ValidationException extends GlobleException{
 	/**
 	 * serialVersionUID:TODO .
 	 * @since JDK 1.6
 	 */
 	private static final long serialVersionUID = 6840626929150637640L;
 	
+	
 	/**
-	 * Creates a new instance of ValidationFailedException.
+	 * Creates a new instance of ValidationException.
 	 * <p>Title: </p>
 	 * <p>Description: </p>
 	 * @param code
 	 * @param detail
 	 */
-	public ValidationFailedException(String code, String detail) {
+	public ValidationException(String code, String detail) {
 		super(code, detail);
 	}
 }

@@ -1,7 +1,7 @@
 
 /**
  * Project Name : Architecture
- * File Name    : UserService.java
+ * File Name    : UserImplProxy.java
  * Package Name : net.yuanmomo.service
  * Created on   : 2014-1-23下午6:09:17
  * Author       : Hongbin Yuan
@@ -9,21 +9,21 @@
  * Company      : 成都逗溜网科技有限公司  
  */
 
-package net.yuanmomo.service;
+package net.yuanmomo.dao.proxy;
 
 import java.util.List;
 
 import net.yuanmomo.dao.mapper.UserMapper;
 import net.yuanmomo.dao.vo.User;
 import net.yuanmomo.dao.vo.UserCriteria;
-import net.yuanmomo.service.exception.DefaultServiceException;
-import net.yuanmomo.service.exception.ItemNotUniqueDAOException;
+import net.yuanmomo.exception.ProxyException;
+import net.yuanmomo.resource.ResourceParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * ClassName : UserService 
+ * ClassName : UserImplProxy 
  * Function  : TODO ADD FUNCTION. 
  * Reason    : TODO ADD REASON. 
  * Date      : 2014-1-23 下午6:09:17 
@@ -34,9 +34,9 @@ import org.springframework.stereotype.Service;
  * @see 	 
  */
 @Service
-public class UserService {
+public class UserImplProxy {
 	@Autowired
-	private UserMapper UserDAOImpl;
+	private UserMapper userDAOImpl;
 	
 	/**
 	 * getUser: 查找指定用户名的用户. <br/>
@@ -44,21 +44,20 @@ public class UserService {
 	 * @author Hongbin Yuan
 	 * @param name
 	 * @return
-	 * @throws DefaultServiceException
+	 * @throws ProxyException
 	 * @since JDK 1.6
 	 */
-	public User getUser(String name) throws DefaultServiceException{
-		try {
-			UserCriteria params = new UserCriteria();
-			params.createCriteria().andNameEqualTo(name);
-			List<User> userList = this.UserDAOImpl.selectByExample(params);
-			if(userList != null && userList.size() >1){
-				throw new ItemNotUniqueDAOException("MULTI_OBJECT_FOUND","The result size is "+userList.size());
-			}
-			return userList.get(0);
-		} catch (Exception e) {
-			throw new DefaultServiceException(e);
+	public User getUser(String name) throws ProxyException,Exception{
+		System.out.println("Proxy层，没有复杂业务逻辑，简单封装DAO层，不允许Proxy层之间调用，向上封装Business来组合复杂业务逻辑。");
+		UserCriteria params = new UserCriteria();
+		params.createCriteria().andNameEqualTo(name);
+		List<User> userList = this.userDAOImpl.selectByExample(params);
+		if(userList == null || userList.size() == 0 ){
+			return null;
+		}else if(userList.size() >1){
+			throw new ProxyException(ResourceParam.PROXY_MULTI_OBJECT_FOUND,"The result size is "+userList.size());
 		}
+		return userList.get(0);
 	}
 	
 	/**
@@ -66,17 +65,14 @@ public class UserService {
 	 *
 	 * @author Hongbin Yuan
 	 * @param user
-	 * @throws DefaultServiceException 
+	 * @throws ProxyException 
 	 * @since JDK 1.6
 	 */
-	public boolean insert(User user) throws DefaultServiceException{
-		try {
-			int count = this.UserDAOImpl.insert(user);
-			return count  == 1 ? true : false;
-		} catch (Exception e) {
-			throw new DefaultServiceException(e);
-		}
+	public boolean insert(User user) throws Exception{
+		int count = this.userDAOImpl.insert(user);
+		return count  == 1 ? true : false;
 	}
+
 	/**
 	 * userDAOImpl.
 	 *
@@ -84,6 +80,6 @@ public class UserService {
 	 * @since   JDK 1.6
 	 */
 	public void setUserDAOImpl(UserMapper userDAOImpl) {
-		UserDAOImpl = userDAOImpl;
+		this.userDAOImpl = userDAOImpl;
 	}
 }

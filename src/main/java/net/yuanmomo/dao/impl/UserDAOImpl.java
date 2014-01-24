@@ -13,11 +13,11 @@ package net.yuanmomo.dao.impl;
 
 import java.util.List;
 
-import net.yuanmomo.dao.exception.DefaultDAOException;
-import net.yuanmomo.dao.exception.InsertFailedDAOException;
 import net.yuanmomo.dao.mapper.UserMapper;
 import net.yuanmomo.dao.vo.User;
 import net.yuanmomo.dao.vo.UserCriteria;
+import net.yuanmomo.exception.DAOException;
+import net.yuanmomo.resource.ResourceParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -83,21 +83,17 @@ public class UserDAOImpl implements UserMapper{
 	 * @author Hongbin Yuan
 	 * @param record
 	 * @return
-	 * @throws DefaultDAOException 
+	 * @throws DAOException 
 	 * @see net.yuanmomo.dao.mapper.UserMapper#insert(net.yuanmomo.dao.vo.User)
 	 */
 	@Override
-	public int insert(User record) throws DefaultDAOException  {
+	public int insert(User record) throws DAOException,Exception  {
 		System.out.println("DAO的实现层，简单的数据库读取和写入操作\n\t可能抛出sql默认异常\n\t可能抛出自定义的dao异常");
-		try {
-			int count = this.userMapper.insertSelective(record);
-			if(count <= 0){
-				throw new DefaultDAOException("INSERT_USER_FAILED_ERROR","Insert Object Error, the Object User is "+record);
-			}
-			return count;
-		} catch (Exception e) {
-			throw new DefaultDAOException(e,record.toString());
+		int count = this.userMapper.insertSelective(record);
+		if(count <= 0){
+			throw new DAOException(ResourceParam.DAO_INSERT_NONE_EXCEPTION,"Insert Object Error, the Object User is "+record);
 		}
+		return count;
 	}
 
 	/**
@@ -119,16 +115,12 @@ public class UserDAOImpl implements UserMapper{
 	 * @author Hongbin Yuan
 	 * @param example
 	 * @return
-	 * @throws DefaultDAOException 
+	 * @throws DAOException 
 	 * @see net.yuanmomo.dao.mapper.UserMapper#selectByExample(net.yuanmomo.dao.vo.UserCriteria)
 	 */
 	@Override
-	public List<User> selectByExample(UserCriteria example) throws DefaultDAOException {
-		try {
-			return this.userMapper.selectByExample(example);
-		} catch (Exception e) {
-			throw new DefaultDAOException(e,example.toString());
-		}
+	public List<User> selectByExample(UserCriteria example) throws DAOException,Exception {
+		return this.userMapper.selectByExample(example);
 	}
 
 	/**

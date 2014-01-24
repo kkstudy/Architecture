@@ -2,7 +2,7 @@
  * Project Name : Architecture
  * Package Name : net.yuanmomo.business.exception
  * Created on   : 2014-1-23下午10:08:15
- * File Name    : DefaultBusinessException.java
+ * File Name    : BusinessException.java
  *
  * Author       : Hongbin Yuan
  * Blog         : yuanmomo.net
@@ -10,7 +10,7 @@
  */
 /**
  * Project Name : Architecture
- * File Name    : DefaultBusinessException.java
+ * File Name    : BusinessException.java
  * Package Name : net.yuanmomo.business.exception
  * Created on   : 2014-1-23下午10:08:15
  * Author       : Hongbin Yuan
@@ -18,12 +18,11 @@
  * Company      : 成都逗溜网科技有限公司  
  */
 
-package net.yuanmomo.business.exception;
+package net.yuanmomo.exception;
 
-import net.yuanmomo.globle.exception.GlobleDefaultException;
 
 /**
- * ClassName : DefaultBusinessException 
+ * ClassName : BusinessException 
  * Function  : TODO ADD FUNCTION. 
  * Reason    : TODO ADD REASON. 
  * Date      : 2014-1-23 下午10:08:15 
@@ -33,7 +32,7 @@ import net.yuanmomo.globle.exception.GlobleDefaultException;
  * @since      JDK 1.6
  * @see 	 
  */
-public class DefaultBusinessException extends GlobleDefaultException{
+public class BusinessException extends GlobleException{
 
 	/**
 	 * serialVersionUID:TODO.
@@ -42,27 +41,13 @@ public class DefaultBusinessException extends GlobleDefaultException{
 	private static final long serialVersionUID = 2678899844315428999L;
 
 	/**
-	 * Creates a new instance of DefaultBusinessException.
-	 * <p>Title: </p>
-	 * <p>Description: </p>
-	 * @param id
-	 * @param code
-	 * @param message
-	 */
-	public DefaultBusinessException(Exception exception,String detail) {
-		// Business层应该配置一个默认的错误id，错误编码
-		// super(code, detail);
-		super("BUSINESS_ERROR", detail,);
-	}
-
-	/**
-	 * Creates a new instance of DefaultBusinessException.
+	 * Creates a new instance of BusinessException.
 	 * <p>Title: </p>
 	 * <p>Description: </p>
 	 * @param code
 	 * @param detail
 	 */
-	public DefaultBusinessException(String code, String detail) {
+	public BusinessException(String code, String detail) {
 		super(code, detail);
 	}
 }

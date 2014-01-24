@@ -1,7 +1,7 @@
 
 /**
  * Project Name : Architecture
- * File Name    : GlobleDefaultException.java
+ * File Name    : GlobleException.java
  * Package Name : net.yuanmomo.globle.exception
  * Created on   : 2014-1-23下午5:48:33
  * Author       : Hongbin Yuan
@@ -9,9 +9,9 @@
  * Company      : 成都逗溜网科技有限公司  
  */
 
-package net.yuanmomo.globle.exception;
+package net.yuanmomo.exception;
 /**
- * ClassName : GlobleDefaultException 
+ * ClassName : GlobleException 
  * Function  : TODO ADD FUNCTION. 
  * Reason    : TODO ADD REASON. 
  * Date      : 2014-1-23 下午5:48:33 
@@ -21,7 +21,7 @@ package net.yuanmomo.globle.exception;
  * @since      JDK 1.6
  * @see 	 
  */
-public class GlobleDefaultException extends Exception{
+public class GlobleException extends RuntimeException{
 
 	/**
 	 * serialVersionUID:TODO.
@@ -42,12 +42,6 @@ public class GlobleDefaultException extends Exception{
 	private String detail;
 	
 	/**
-	 * message: 该异常的描述信息.
-	 * @since JDK 1.6
-	 */
-	private String message;
-	
-	/**
 	 * fixId: 该异常的解决方案编号.
 	 * @since JDK 1.6
 	 */
@@ -59,34 +53,37 @@ public class GlobleDefaultException extends Exception{
 	 */
 	private String fixInfo;
 	
-	/*
-	 * 有其它的一些错误信息
-	 * 
-	 */
 	/**
-	 * Creates a new instance of GlobleDefaultException.
+	 * Creates a new instance of GlobleException.
 	 * <p>Title: </p>
 	 * <p>Description: </p>
 	 * @param code
 	 * @param detail
 	 */
-	public GlobleDefaultException(String code, String detail) {
+	public GlobleException(String code, String detail) {
 		super();
 		this.code = code;
 		this.detail = detail;
 	}
 	
 	/**
-	 * Creates a new instance of GlobleDefaultException.
-	 * <p>Title: </p>
-	 * <p>Description: </p>
-	 * @param exception
-	 * @param detail
+	 * code.
+	 *
+	 * @return  the code
+	 * @since   JDK 1.6
 	 */
-	public GlobleDefaultException(Exception exception,String detail) {
-		super();
-		this.message = exception.getMessage();
-		this.detail = detail;
+	public String getCode() {
+		return code;
+	}
+
+	/**
+	 * code.
+	 *
+	 * @param   code    the code to set
+	 * @since   JDK 1.6
+	 */
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	/**
@@ -98,6 +95,7 @@ public class GlobleDefaultException extends Exception{
 	public String getDetail() {
 		return detail;
 	}
+
 	/**
 	 * detail.
 	 *
@@ -107,6 +105,47 @@ public class GlobleDefaultException extends Exception{
 	public void setDetail(String detail) {
 		this.detail = detail;
 	}
+
+	/**
+	 * fixId.
+	 *
+	 * @return  the fixId
+	 * @since   JDK 1.6
+	 */
+	public int getFixId() {
+		return fixId;
+	}
+
+	/**
+	 * fixId.
+	 *
+	 * @param   fixId    the fixId to set
+	 * @since   JDK 1.6
+	 */
+	public void setFixId(int fixId) {
+		this.fixId = fixId;
+	}
+
+	/**
+	 * fixInfo.
+	 *
+	 * @return  the fixInfo
+	 * @since   JDK 1.6
+	 */
+	public String getFixInfo() {
+		return fixInfo;
+	}
+
+	/**
+	 * fixInfo.
+	 *
+	 * @param   fixInfo    the fixInfo to set
+	 * @since   JDK 1.6
+	 */
+	public void setFixInfo(String fixInfo) {
+		this.fixInfo = fixInfo;
+	}
+
 	/**
 	 * toString:. <br/>
 	 *
@@ -116,8 +155,7 @@ public class GlobleDefaultException extends Exception{
 	 */
 	@Override
 	public String toString() {
-		return "GlobleDefaultException [code=" + code
-				+ ", detail=" + detail + ", message=" + message + ", fixId="
-				+ fixId + ", fixInfo=" + fixInfo + "]";
+		return "GlobleException [code=" + code +", detail=" + detail + ", fixId=" + fixId + ", fixInfo="
+				+ fixInfo + "]";
 	}
 }
