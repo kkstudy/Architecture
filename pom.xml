@@ -38,6 +38,8 @@
 		
 		<org.springframework.version>3.2.4.RELEASE</org.springframework.version>
 
+		<jackson-2-version>2.2.3</jackson-2-version>
+
 		<aspectj.version>1.7.0</aspectj.version>
 		<cglib.nodep.version>2.2.2</cglib.nodep.version>
 
@@ -151,6 +153,11 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework.version}</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.fasterxml.jackson.core</groupId>
+		  <artifactId>jackson-databind</artifactId>
+		  <version>${jackson-2-version}</version>
 		</dependency>
 	</dependencies>
 </project>
