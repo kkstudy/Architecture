@@ -48,7 +48,7 @@ public class UserImplProxy {
 	 * @since JDK 1.6
 	 */
 	public User getUser(String name) throws ProxyException,Exception{
-		System.out.println("Proxy层，没有复杂业务逻辑，简单封装DAO层，不允许Proxy层之间调用，向上封装Business来组合复杂业务逻辑。");
+		System.out.println("Proxy层，包含简单的业务逻辑，同时简单封装DAO层，不允许Proxy层之间调用，向上封装Business来组合复杂业务逻辑。");
 		UserCriteria params = new UserCriteria();
 		params.createCriteria().andNameEqualTo(name);
 		List<User> userList = this.userDAOImpl.selectByExample(params);

@@ -27,10 +27,12 @@ public class UserController {
 	@RequestMapping
 	@ResponseBody
 	public ResponseMessage insert(HttpServletRequest request, ModelMap map){
-		User user = new User();
-		user.setName("yuanmomo2");
-		user.setAge((short)20);
-		System.out.println("Controller层，主要装配请求数据，以及返回数据，处理异常");
+		User user = null;
+//		User user = new User();
+//		user.setName("yuanmomo2");
+//		user.setAge((short)20);
+//		return ResponseMessage.getOptionUnauthorizedResponseMessage();
+		System.out.println("Controller层，主要装配请求数据，以及处理异常,返回操作结果，以及数据结果，");
 		try {
 			boolean flag = this.userBusiness.addUser(user);
 			if(flag){

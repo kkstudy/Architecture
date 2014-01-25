@@ -29,7 +29,8 @@ public class UserBusiness{
 	 */
 	@Transactional(propagation=Propagation.REQUIRED,isolation =Isolation.REPEATABLE_READ, rollbackFor = Exception.class)
 	public boolean addUser(User user) throws ValidationException,BusinessException,Exception {
-		System.out.println("Business层业务逻辑处理层，进行数据校验，根据业务逻辑调用Proxy层。");
+		System.out.println("Business层，首先进行数据校验，感觉也行可以单独抽象为一个新的validation层。");
+		System.out.println("Business层然后处理业务逻辑，通过组合调用Proxy层中简单的业务逻辑来处理复杂的业务逻辑。");
 		
 		// 校验用户数据
 		if(user == null){

@@ -27,8 +27,10 @@ import java.util.ResourceBundle;
  */
 public class ResourceUtil {
 	private static ResourceBundle defaultBundle = null;
+
 	static{
-		defaultBundle = ResourceBundle.getBundle("resource.exceptionMap", Locale.getDefault()); 
+//		defaultBundle = ResourceBundle.getBundle("resource.exceptionMap", Locale.getDefault()); 
+		defaultBundle = ResourceBundle.getBundle("resource.exceptionMap", new Locale("en", "US")); 
 	}
 	
 	public static String getString(String code){
