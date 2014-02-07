@@ -77,7 +77,8 @@ public class ResponseMessage {
 	 * @since JDK 1.6
 	 */
 	public static ResponseMessage getSuccessResponseMessage(){
-		return new ResponseMessage(ResourceUtil.getString(ResourceParam.STATUS_CODE_SUCCESS),ResourceUtil.getString(ResourceParam.STATUS_CODE_SUCCESS_MESSAGE));
+		return new ResponseMessage(ResourceUtil.getDescription(ResourceParam.STATUS_CODE_SUCCESS),
+				ResourceUtil.getDescription(ResourceParam.STATUS_CODE_SUCCESS_MESSAGE));
 	}
 	
 	/**
@@ -89,7 +90,7 @@ public class ResponseMessage {
 	 * @since JDK 1.6
 	 */
 	public static ResponseMessage getSuccessResponseMessage(String message){
-		return new ResponseMessage(ResourceUtil.getString(ResourceParam.STATUS_CODE_SUCCESS),message);
+		return new ResponseMessage(ResourceUtil.getDescription(ResourceParam.STATUS_CODE_SUCCESS),message);
 	}
 	
 	/**
@@ -101,7 +102,8 @@ public class ResponseMessage {
 	 * @since JDK 1.6
 	 */
 	public static ResponseMessage getSuccessResponseMessage(Object value){
-		return new ResponseMessage(ResourceUtil.getString(ResourceParam.STATUS_CODE_SUCCESS),ResourceUtil.getString(ResourceParam.STATUS_CODE_SUCCESS_MESSAGE),value);
+		return new ResponseMessage(ResourceUtil.getDescription(ResourceParam.STATUS_CODE_SUCCESS),
+				ResourceUtil.getDescription(ResourceParam.STATUS_CODE_SUCCESS_MESSAGE),value);
 	}
 	
 	/**
@@ -112,7 +114,8 @@ public class ResponseMessage {
 	 * @since JDK 1.6
 	 */
 	public static ResponseMessage getFailedResponseMessage(){
-		return new ResponseMessage(ResourceUtil.getString(ResourceParam.STATUS_CODE_FAILED),ResourceUtil.getString(ResourceParam.STATUS_CODE_FAILED_MESSAGE));
+		return new ResponseMessage(ResourceUtil.getDescription(ResourceParam.STATUS_CODE_FAILED),
+				ResourceUtil.getDescription(ResourceParam.STATUS_CODE_FAILED_MESSAGE));
 	}
 	
 	/**
@@ -124,7 +127,7 @@ public class ResponseMessage {
 	 * @since JDK 1.6
 	 */
 	public static ResponseMessage getFailedResponseMessage(String message){
-		return new ResponseMessage(ResourceUtil.getString(ResourceParam.STATUS_CODE_FAILED),message);
+		return new ResponseMessage(ResourceUtil.getDescription(ResourceParam.STATUS_CODE_FAILED),message);
 	}
 	
 	/**
@@ -135,7 +138,8 @@ public class ResponseMessage {
 	 * @since JDK 1.6
 	 */
 	public static ResponseMessage getTimeoutResponseMessage(){
-		return new ResponseMessage(ResourceUtil.getString(ResourceParam.STATUS_CODE_TIMEOUT),ResourceUtil.getString(ResourceParam.STATUS_CODE_TIMEOUT_MESSAGE));
+		return new ResponseMessage(ResourceUtil.getDescription(ResourceParam.STATUS_CODE_TIMEOUT),
+				ResourceUtil.getDescription(ResourceParam.STATUS_CODE_TIMEOUT_MESSAGE));
 	}
 	
 	/**
@@ -146,7 +150,8 @@ public class ResponseMessage {
 	 * @since JDK 1.6
 	 */
 	public static ResponseMessage getOptionUnauthorizedResponseMessage(){
-		return new ResponseMessage(ResourceUtil.getString(ResourceParam.STATUS_CODE_OPTION_UNAUTHORIZED),ResourceUtil.getString(ResourceParam.STATUS_CODE_OPTION_UNAUTHORIZED_MESSAGE));
+		return new ResponseMessage(ResourceUtil.getDescription(ResourceParam.STATUS_CODE_OPTION_UNAUTHORIZED),
+				ResourceUtil.getDescription(ResourceParam.STATUS_CODE_OPTION_UNAUTHORIZED_MESSAGE));
 	}
 	/**
 	 * statusCode.

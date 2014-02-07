@@ -1,11 +1,16 @@
 package net.yuanmomo.controller;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import net.yuanmomo.bean.ResponseMessage;
 import net.yuanmomo.business.UserBusiness;
 import net.yuanmomo.dao.vo.User;
-import net.yuanmomo.exception.GlobleException;
+import net.yuanmomo.exception.base.NestedCheckedException;
+import net.yuanmomo.exception.base.NestedUncheckedException;
 import net.yuanmomo.resource.ResourceParam;
 import net.yuanmomo.resource.ResourceUtil;
 
@@ -36,21 +41,49 @@ public class UserController {
 		try {
 			boolean flag = this.userBusiness.addUser(user);
 			if(flag){
-				return ResponseMessage.getSuccessResponseMessage(ResourceUtil.getString(ResourceParam.USER_REGISTER_SUCCESS));
+				return ResponseMessage.getSuccessResponseMessage(ResourceUtil.getDescription(ResourceParam.USER_REGISTER_SUCCESS));
 			}else{
-				return ResponseMessage.getFailedResponseMessage(ResourceUtil.getString(ResourceParam.USER_REGISTER_FAILED));
+				return ResponseMessage.getFailedResponseMessage(ResourceUtil.getDescription(ResourceParam.USER_REGISTER_FAILED));
 			}
-		} catch (GlobleException globleE) {
+		} catch (NestedCheckedException checkedException) {
 			// 自定义业务逻辑异常
-			logger.error("执行用户添加失败-----"+globleE.getCode()+","+globleE.getDetail());
-			return ResponseMessage.getFailedResponseMessage(ResourceUtil.getString(globleE.getCode()));
-		} catch (Exception e) {
-			// 第三方异常，返回默认的描述信息
-			logger.error("执行用户添加，发生异常-----"+e.getLocalizedMessage());
-			return ResponseMessage.getFailedResponseMessage(ResourceUtil.getString(ResourceParam.SERVER_ERROR));
-		} 
+			logger.error("执行用户添加失败-----"+ checkedException.getCode() + "," + checkedException.getMessage());
+			return ResponseMessage.getFailedResponseMessage(ResourceUtil.getDescription(checkedException.getCode()));
+		} catch (NestedUncheckedException uncheckedException) {
+			// 系统非检查异常异常，比如SQLException
+			logger.error("执行用户添加失败-----"+ uncheckedException.getCode() + "," + uncheckedException.getMessage());
+			uncheckedException.printStackTrace();
+			return ResponseMessage.getFailedResponseMessage(ResourceUtil.getDescription(uncheckedException.getCode()));
+		}
 	}
 
+	@RequestMapping(params = "mode=batch")
+	@ResponseBody
+	public ResponseMessage insertBatch(HttpServletRequest request, ModelMap map){
+		User user1 = new User("yuanmomo101", (short)101, new Date());
+		User user2 = new User("yuanmomo102", (short)102, new Date());
+		User user3 = new User("yuanmomo103", (short)103, new Date());
+		User user4 = new User("yuanmomo104", (short)104, new Date());
+		List<User> userList = new ArrayList<User>();
+		userList.add(user1);
+		userList.add(user2);
+		userList.add(user3);
+		userList.add(user4);
+		try {
+			int count = this.userBusiness.insertBatch(userList);
+			if(count > 0){
+				return ResponseMessage.getSuccessResponseMessage(ResourceUtil.getDescription(ResourceParam.USER_REGISTER_SUCCESS));
+			}else{
+				return ResponseMessage.getFailedResponseMessage(ResourceUtil.getDescription(ResourceParam.USER_REGISTER_FAILED));
+			}
+		} catch (NestedUncheckedException uncheckedException) {
+			// 系统非检查异常异常，比如SQLException
+			logger.error("批量添加用户失败-----"+ uncheckedException.getCode() + "," + uncheckedException.getMessage());
+			uncheckedException.printStackTrace();
+			return ResponseMessage.getFailedResponseMessage(ResourceUtil.getDescription(uncheckedException.getCode()));
+		} 
+	}
+	
 	/**
 	 * userBusiness.
 	 *

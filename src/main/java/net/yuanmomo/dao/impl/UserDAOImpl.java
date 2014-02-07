@@ -19,6 +19,7 @@ import net.yuanmomo.exception.DAOException;
 import net.yuanmomo.resource.ResourceParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * ClassName : UserDAOImpl 
@@ -31,7 +32,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @since      JDK 1.6
  * @see 	 
  */
-public class UserDAOImpl {
+@Service
+public class UserDAOImpl implements UserDAO{
 	@Autowired
 	private UserDAO userDAO;
 
@@ -51,8 +53,8 @@ public class UserDAOImpl {
 		int count = 0;
 		try {
 			count = this.userDAO.insertBatch(userList);
-		} catch (Exception e2){
-			throw new DAOException(ResourceParam.DAO_INSERT_BATCH_EXCEPTION,"Batch Insert User.class List Error");
+		} catch (Exception e){
+			throw new DAOException(ResourceParam.DAO_INSERT_BATCH_EXCEPTION,"Batch Insert User.class List Error",e);
 		}
 		return count;
 	}
@@ -70,7 +72,7 @@ public class UserDAOImpl {
 		try {
 			return this.userDAO.getUserByName(userName);
 		} catch (Exception e) {
-			throw new DAOException(ResourceParam.DAO_SELECT_EXCEPTION,"Select User by name failed, userName = "+userName);
+			throw new DAOException(ResourceParam.DAO_SELECT_EXCEPTION,"Select User by name failed, userName = "+userName,e);
 		}
 	}
 	

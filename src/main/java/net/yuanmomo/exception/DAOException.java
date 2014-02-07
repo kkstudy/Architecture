@@ -11,6 +11,8 @@
 
 package net.yuanmomo.exception;
 
+import net.yuanmomo.exception.base.NestedUncheckedException;
+
 
 /**
  * ClassName : DAOException 
@@ -23,7 +25,7 @@ package net.yuanmomo.exception;
  * @since      JDK 1.6
  * @see 	 
  */
-public class DAOException extends GlobleException{
+public class DAOException extends NestedUncheckedException{
 
 	/**
 	 * serialVersionUID:TODO .
@@ -36,9 +38,21 @@ public class DAOException extends GlobleException{
 	 * <p>Title: </p>
 	 * <p>Description: </p>
 	 * @param code
-	 * @param detail
+	 * @param message
+	 * @param cause
 	 */
-	public DAOException(String code, String detail) {
-		super(code, detail);
+	public DAOException(String code, String message, Throwable cause) {
+		super(code, message, cause);
+	}
+
+	/**
+	 * Creates a new instance of DAOException.
+	 * <p>Title: </p>
+	 * <p>Description: </p>
+	 * @param code
+	 * @param message
+	 */
+	public DAOException(String code, String message) {
+		super(code, message);
 	}
 }

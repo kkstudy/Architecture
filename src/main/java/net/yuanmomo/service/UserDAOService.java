@@ -1,6 +1,6 @@
 /**
  * Project Name : Architecture
- * File Name    : UserDAOProxy.java
+ * File Name    : UserDAOService.java
  * Package Name : net.yuanmomo.dao.proxy
  * Created on   : 2014-2-7下午3:06:49
  * Author       : Hongbin Yuan
@@ -8,7 +8,7 @@
  * Company      : 成都逗溜网科技有限公司  
  */
 
-package net.yuanmomo.proxy;
+package net.yuanmomo.service;
 
 import java.util.List;
 
@@ -16,9 +16,10 @@ import net.yuanmomo.dao.mapper.UserDAO;
 import net.yuanmomo.dao.vo.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
- * ClassName : UserDAOProxy 
+ * ClassName : UserDAOService 
  * Function  : TODO ADD FUNCTION. 
  * Reason    : TODO ADD REASON. 
  * Date      : 2014-2-7 下午3:06:49 
@@ -28,7 +29,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @since      JDK 1.6
  * @see 	 
  */
-public class UserDAOProxy {
+@Service
+public class UserDAOService {
 	@Autowired
 	private UserDAO userDAOImpl;
 
@@ -53,7 +55,7 @@ public class UserDAOProxy {
 	 * @since JDK 1.6
 	 */
 	public User getUser(String name) {
-		System.out.println("Proxy层，包含简单的业务逻辑，同时简单封装DAO层，不允许Proxy层之间调用，向上封装Business来组合复杂业务逻辑。");
+		System.out.println("Service层，包含简单的业务逻辑，同时简单封装DAO层，不允许Service层之间调用，向上封装Business来组合复杂业务逻辑。");
 		return this.userDAOImpl.getUserByName(name);
 	}
 	

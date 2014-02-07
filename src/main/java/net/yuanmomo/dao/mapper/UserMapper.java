@@ -8,9 +8,9 @@ import net.yuanmomo.exception.DAOException;
 
 public interface UserMapper {
 
-    public int  insert(User record) throws DAOException;
+    public int  insert(User user) throws DAOException;
 
-    public int  insertSelective(User record) throws DAOException;
+    public int  insertSelective(User user) throws DAOException;
 
     public List<User> selectByExample(UserCriteria example) throws DAOException;
 }

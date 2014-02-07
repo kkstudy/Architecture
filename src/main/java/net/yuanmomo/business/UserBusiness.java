@@ -5,9 +5,9 @@ import java.util.List;
 import net.yuanmomo.dao.vo.User;
 import net.yuanmomo.exception.BusinessException;
 import net.yuanmomo.exception.ValidationException;
-import net.yuanmomo.proxy.UserDAOProxy;
-import net.yuanmomo.proxy.UserMapperProxy;
 import net.yuanmomo.resource.ResourceParam;
+import net.yuanmomo.service.UserDAOService;
+import net.yuanmomo.service.UserMapperService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,10 +19,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserBusiness{
 	
 	@Autowired
-	private UserMapperProxy userImplProxy=null;
+	private UserDAOService userDAOService=null;
 	
 	@Autowired
-	private UserDAOProxy userDAOProxy=null;
+	private UserMapperService userMapperService=null;
 
 	/**
 	 * addUser: 插入一个用户. <br/>
@@ -30,13 +30,13 @@ public class UserBusiness{
 	 * @author Hongbin Yuan
 	 * @param user
 	 * @return
-	 * @throws Exception
+	 * @throws BusinessException
 	 * @since JDK 1.6
 	 */
 	@Transactional(propagation=Propagation.REQUIRED,isolation =Isolation.REPEATABLE_READ, rollbackFor = Exception.class)
-	public boolean addUser(User user) throws ValidationException,BusinessException {
+	public boolean addUser(User user) throws BusinessException {
 		System.out.println("Business层，首先进行数据校验，感觉也行可以单独抽象为一个新的validation层。");
-		System.out.println("Business层然后处理业务逻辑，通过组合调用Proxy层中简单的业务逻辑来处理复杂的业务逻辑。");
+		System.out.println("Business层然后处理业务逻辑，通过组合调用Service层中简单的业务逻辑来处理复杂的业务逻辑。");
 		
 		// 校验用户数据
 		if(user == null){
@@ -50,12 +50,12 @@ public class UserBusiness{
 		}
 		
 		// 判断用户名是否已经存在
-		User u = this.userDAOProxy.getUser(user.getName());
+		User u = this.userDAOService.getUser(user.getName());
 		
 		if(u!=null){
 			throw new BusinessException(ResourceParam.BUSINESS_USER_NAME_EXISTS, "user.getName=" + user.getName());
 		}
-		return this.userImplProxy.insert(user);
+		return this.userMapperService.insert(user);
 	}
 
 	/**
@@ -68,27 +68,15 @@ public class UserBusiness{
 	 * @throws Exception
 	 * @since JDK 1.6
 	 */
-	public int insertBatch(List<User> userList)  throws BusinessException,Exception{
-		return this.userDAOProxy.insertBatch(userList);
-	}
-	
-	/**
-	 * userImplProxy.
-	 *
-	 * @param   userImplProxy    the userImplProxy to set
-	 * @since   JDK 1.6
-	 */
-	public void setUserImplProxy(UserMapperProxy userImplProxy) {
-		this.userImplProxy = userImplProxy;
+	public int insertBatch(List<User> userList){
+		return this.userDAOService.insertBatch(userList);
 	}
 
-	/**
-	 * userDAOProxy.
-	 *
-	 * @param   userDAOProxy    the userDAOProxy to set
-	 * @since   JDK 1.6
-	 */
-	public void setUserDAOProxy(UserDAOProxy userDAOProxy) {
-		this.userDAOProxy = userDAOProxy;
+	public void setUserDAOService(UserDAOService userDAOService) {
+		this.userDAOService = userDAOService;
+	}
+
+	public void setUserMapperService(UserMapperService userMapperService) {
+		this.userMapperService = userMapperService;
 	}
 }

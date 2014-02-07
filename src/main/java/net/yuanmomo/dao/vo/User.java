@@ -45,8 +45,22 @@ public class User implements Serializable {
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
+    /**
+	 * Creates a new instance of User.
+	 * <p>Title: </p>
+	 * <p>Description: </p>
+	 * @param name
+	 * @param age
+	 * @param birthday
+	 */
+	public User(String name, Short age, Date birthday) {
+		super();
+		this.name = name;
+		this.age = age;
+		this.birthday = birthday;
+	}
 
-    @Override
+	@Override
     public boolean equals(Object that) {
         if (this == that) {
             return true;

@@ -34,7 +34,7 @@ import org.springframework.stereotype.Service;
  * @see 	 
  */
 @Service
-public class UserMapperImpl{
+public class UserMapperImpl implements UserMapper{
 	@Autowired
 	private UserMapper userMapper;
 
@@ -47,16 +47,16 @@ public class UserMapperImpl{
 	 * @throws DAOException
 	 * @since JDK 1.6
 	 */
-	public int insert(User record) throws DAOException  {
+	public int insert(User user) throws DAOException  {
 		System.out.println("Mapper的实现层，简单的数据库读取和写入操作");
 		System.out.println("Mapper的实现层，可能抛出sql默认异常");
 		System.out.println("Mapper的实现层，可能抛出自定义的dao异常");
 		int count = 0;
 		try {
-			count = this.userMapper.insertSelective(record);
+			count = this.userMapper.insert(user);
 		} catch (Exception e) {
 			throw new DAOException(ResourceParam.MAPPER_INSERT_EXCEPTION,
-					"Insert Object Error, the Object User is "+record);
+					"Insert Object Error, the Object User is "+ user ,e);
 		}
 		return count;
 	}
@@ -77,7 +77,7 @@ public class UserMapperImpl{
 		try {
 			return this.userMapper.selectByExample(example);
 		} catch (Exception e) {
-			throw new DAOException(ResourceParam.MAPPER_SELECT_EXCEPTION,e.getLocalizedMessage());
+			throw new DAOException(ResourceParam.MAPPER_SELECT_EXCEPTION,e.getMessage(),e);
 		}
 	}
 
@@ -90,5 +90,26 @@ public class UserMapperImpl{
 	 */
 	public void setUserMapper(UserMapper userMapper) {
 		this.userMapper = userMapper;
+	}
+
+	/**
+	 * insertSelective:. <br/>
+	 *
+	 * @author Hongbin Yuan
+	 * @param user
+	 * @return
+	 * @throws DAOException
+	 * @see net.yuanmomo.dao.mapper.UserMapper#insertSelective(net.yuanmomo.dao.vo.User)
+	 */
+	@Override
+	public int insertSelective(User user) throws DAOException {
+		int count = 0;
+		try {
+			count = this.userMapper.insertSelective(user);
+		} catch (Exception e) {
+			throw new DAOException(ResourceParam.MAPPER_INSERT_EXCEPTION,
+					"Insert Object Error, the Object User is "+ user ,e);
+		}
+		return count;
 	}
 }

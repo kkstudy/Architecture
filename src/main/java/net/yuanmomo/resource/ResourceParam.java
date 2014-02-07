@@ -38,9 +38,12 @@ public class ResourceParam {
 	/********************** 默认异常信息 *****************************/
 	public static final String SERVER_ERROR="SERVER_ERROR";
 	
-	/********************** 业务逻辑描述信息 *****************************/
+	/********************** 请求处理结果描述信息 *****************************/
 	public static final String USER_REGISTER_SUCCESS="USER_REGISTER_SUCCESS";
 	public static final String USER_REGISTER_FAILED="USER_REGISTER_FAILED";
+	
+	public static final String USER_BATCH_INSERT_SUCCESS="USER_BATCH_INSERT_SUCCESS";
+	public static final String USER_BATCH_INSERT_FAILED="USER_BATCH_INSERT_FAILED";
 	
 	/********************** MAPPER层异常对应描述 *****************************/
 	public static final String MAPPER_INSERT_EXCEPTION="MAPPER_INSERT_EXCEPTION";
@@ -50,8 +53,7 @@ public class ResourceParam {
 	public static final String DAO_INSERT_BATCH_EXCEPTION="DAO_INSERT_BATCH_EXCEPTION";
 	public static final String DAO_SELECT_EXCEPTION="DAO_SELECT_EXCEPTION";
 	
-	/********************** Proxy层异常对应描述 *****************************/
-	public static final String PROXY_MULTI_OBJECT_FOUND="PROXY_MULTI_OBJECT_FOUND";
+	/********************** Service层异常对应描述 *****************************/
 	
 	/********************** Business层异常对应描述  *****************************/
 	public static final String BUSINESS_USER_NAME_EXISTS="BUSINESS_USER_NAME_EXISTS";

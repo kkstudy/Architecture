@@ -32,22 +32,33 @@ package net.yuanmomo.exception;
  * @since      JDK 1.6
  * @see 	 
  */
-public class ValidationException extends GlobleException{
+public class ValidationException extends BusinessException{
 	/**
 	 * serialVersionUID:TODO .
 	 * @since JDK 1.6
 	 */
 	private static final long serialVersionUID = 6840626929150637640L;
-	
-	
+
 	/**
 	 * Creates a new instance of ValidationException.
 	 * <p>Title: </p>
 	 * <p>Description: </p>
 	 * @param code
-	 * @param detail
+	 * @param message
 	 */
-	public ValidationException(String code, String detail) {
-		super(code, detail);
+	public ValidationException(String code, String message) {
+		super(code, message);
+	}
+
+	/**
+	 * Creates a new instance of ValidationException.
+	 * <p>Title: </p>
+	 * <p>Description: </p>
+	 * @param code
+	 * @param message
+	 * @param cause
+	 */
+	public ValidationException(String code, String message, Throwable cause) {
+		super(code, message, cause);
 	}
 }

@@ -20,6 +20,8 @@
 
 package net.yuanmomo.exception;
 
+import net.yuanmomo.exception.base.NestedCheckedException;
+
 
 /**
  * ClassName : BusinessException 
@@ -32,7 +34,7 @@ package net.yuanmomo.exception;
  * @since      JDK 1.6
  * @see 	 
  */
-public class BusinessException extends GlobleException{
+public class BusinessException extends NestedCheckedException {
 
 	/**
 	 * serialVersionUID:TODO.
@@ -45,9 +47,21 @@ public class BusinessException extends GlobleException{
 	 * <p>Title: </p>
 	 * <p>Description: </p>
 	 * @param code
-	 * @param detail
+	 * @param message
+	 * @param cause
 	 */
-	public BusinessException(String code, String detail) {
-		super(code, detail);
+	public BusinessException(String code, String message, Throwable cause) {
+		super(code, message, cause);
+	}
+
+	/**
+	 * Creates a new instance of BusinessException.
+	 * <p>Title: </p>
+	 * <p>Description: </p>
+	 * @param code
+	 * @param message
+	 */
+	public BusinessException(String code, String message) {
+		super(code, message);
 	}
 }

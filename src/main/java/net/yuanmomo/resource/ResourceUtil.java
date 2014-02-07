@@ -33,7 +33,7 @@ public class ResourceUtil {
 		defaultBundle = ResourceBundle.getBundle("resource.exceptionMap", new Locale("en", "US")); 
 	}
 	
-	public static String getString(String code){
+	public static String getDescription(String code){
 		if(code == null || "".equals(code.trim())){
 			return "";
 		}
