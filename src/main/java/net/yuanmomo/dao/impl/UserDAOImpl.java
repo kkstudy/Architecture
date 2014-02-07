@@ -3,7 +3,7 @@
  * Project Name : Architecture
  * File Name    : UserDAOImpl.java
  * Package Name : net.yuanmomo.dao.impl
- * Created on   : 2014-1-23下午5:44:55
+ * Created on   : 2014-2-7下午3:09:56
  * Author       : Hongbin Yuan
  * Blog         : yuanmomo.net
  * Company      : 成都逗溜网科技有限公司  
@@ -13,195 +13,74 @@ package net.yuanmomo.dao.impl;
 
 import java.util.List;
 
-import net.yuanmomo.dao.mapper.UserMapper;
+import net.yuanmomo.dao.mapper.UserDAO;
 import net.yuanmomo.dao.vo.User;
-import net.yuanmomo.dao.vo.UserCriteria;
 import net.yuanmomo.exception.DAOException;
 import net.yuanmomo.resource.ResourceParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  * ClassName : UserDAOImpl 
  * Function  : TODO ADD FUNCTION. 
  * Reason    : TODO ADD REASON. 
- * Date      : 2014-1-23 下午5:44:55 
+ * Date      : 2014-2-7 下午3:09:56 
  *
  * @author   : Hongbin Yuan
  * @version  
  * @since      JDK 1.6
  * @see 	 
  */
-@Service
-public class UserDAOImpl implements UserMapper{
+public class UserDAOImpl {
 	@Autowired
-	private UserMapper userMapper;
+	private UserDAO userDAO;
 
 	/**
-	 * countByExample:. <br/>
+	 * insertBatch:. <br/>
 	 *
 	 * @author Hongbin Yuan
-	 * @param example
+	 * @param userList
 	 * @return
-	 * @see net.yuanmomo.dao.mapper.UserMapper#countByExample(net.yuanmomo.dao.vo.UserCriteria)
+	 * @throws DAOException
+	 * @since JDK 1.6
 	 */
-	@Override
-	public int countByExample(UserCriteria example) {
-		return 0;
-	}
-
-	/**
-	 * deleteByExample:. <br/>
-	 *
-	 * @author Hongbin Yuan
-	 * @param example
-	 * @return
-	 * @see net.yuanmomo.dao.mapper.UserMapper#deleteByExample(net.yuanmomo.dao.vo.UserCriteria)
-	 */
-	@Override
-	public int deleteByExample(UserCriteria example) {
-		return 0;
-	}
-
-	/**
-	 * deleteByPrimaryKey:. <br/>
-	 *
-	 * @author Hongbin Yuan
-	 * @param id
-	 * @return
-	 * @see net.yuanmomo.dao.mapper.UserMapper#deleteByPrimaryKey(java.lang.Integer)
-	 */
-	@Override
-	public int deleteByPrimaryKey(Integer id) {
-		return 0;
-	}
-
-	/**
-	 * insert:. <br/>
-	 *
-	 * @author Hongbin Yuan
-	 * @param record
-	 * @return
-	 * @throws DAOException 
-	 * @see net.yuanmomo.dao.mapper.UserMapper#insert(net.yuanmomo.dao.vo.User)
-	 */
-	@Override
-	public int insert(User record) throws DAOException,Exception  {
+	public int insertBatch(List<User> userList) throws DAOException{
 		System.out.println("DAO的实现层，简单的数据库读取和写入操作");
 		System.out.println("DAO的实现层，可能抛出sql默认异常");
 		System.out.println("DAO的实现层，可能抛出自定义的dao异常");
-		int count = this.userMapper.insertSelective(record);
-		if(count <= 0){
-			throw new DAOException(ResourceParam.DAO_INSERT_NONE_EXCEPTION,"Insert Object Error, the Object User is "+record);
+		int count = 0;
+		try {
+			count = this.userDAO.insertBatch(userList);
+		} catch (Exception e2){
+			throw new DAOException(ResourceParam.DAO_INSERT_BATCH_EXCEPTION,"Batch Insert User.class List Error");
 		}
 		return count;
 	}
 
 	/**
-	 * insertSelective:. <br/>
+	 * getUserByName:. <br/>
 	 *
 	 * @author Hongbin Yuan
-	 * @param record
+	 * @param userName
 	 * @return
-	 * @see net.yuanmomo.dao.mapper.UserMapper#insertSelective(net.yuanmomo.dao.vo.User)
+	 * @throws DAOException
+	 * @since JDK 1.6
 	 */
-	@Override
-	public int insertSelective(User record) {
-		return 0;
+	public User getUserByName(String userName) throws DAOException {
+		try {
+			return this.userDAO.getUserByName(userName);
+		} catch (Exception e) {
+			throw new DAOException(ResourceParam.DAO_SELECT_EXCEPTION,"Select User by name failed, userName = "+userName);
+		}
 	}
-
+	
 	/**
-	 * selectByExample:. <br/>
+	 * userDAO.
 	 *
-	 * @author Hongbin Yuan
-	 * @param example
-	 * @return
-	 * @throws DAOException 
-	 * @see net.yuanmomo.dao.mapper.UserMapper#selectByExample(net.yuanmomo.dao.vo.UserCriteria)
-	 */
-	@Override
-	public List<User> selectByExample(UserCriteria example) throws DAOException,Exception {
-		System.out.println("DAO的实现层，简单的数据库读取和写入操作");
-		System.out.println("DAO的实现层，可能抛出sql默认异常");
-		System.out.println("DAO的实现层，可能抛出自定义的dao异常");
-		return this.userMapper.selectByExample(example);
-	}
-
-	/**
-	 * selectByPrimaryKey:. <br/>
-	 *
-	 * @author Hongbin Yuan
-	 * @param id
-	 * @return
-	 * @see net.yuanmomo.dao.mapper.UserMapper#selectByPrimaryKey(java.lang.Integer)
-	 */
-	@Override
-	public User selectByPrimaryKey(Integer id) {
-		return null;
-	}
-
-	/**
-	 * updateByExampleSelective:. <br/>
-	 *
-	 * @author Hongbin Yuan
-	 * @param record
-	 * @param example
-	 * @return
-	 * @see net.yuanmomo.dao.mapper.UserMapper#updateByExampleSelective(net.yuanmomo.dao.vo.User, net.yuanmomo.dao.vo.UserCriteria)
-	 */
-	@Override
-	public int updateByExampleSelective(User record, UserCriteria example) {
-		return 0;
-	}
-
-	/**
-	 * updateByExample:. <br/>
-	 *
-	 * @author Hongbin Yuan
-	 * @param record
-	 * @param example
-	 * @return
-	 * @see net.yuanmomo.dao.mapper.UserMapper#updateByExample(net.yuanmomo.dao.vo.User, net.yuanmomo.dao.vo.UserCriteria)
-	 */
-	@Override
-	public int updateByExample(User record, UserCriteria example) {
-		return 0;
-	}
-
-	/**
-	 * updateByPrimaryKeySelective:. <br/>
-	 *
-	 * @author Hongbin Yuan
-	 * @param record
-	 * @return
-	 * @see net.yuanmomo.dao.mapper.UserMapper#updateByPrimaryKeySelective(net.yuanmomo.dao.vo.User)
-	 */
-	@Override
-	public int updateByPrimaryKeySelective(User record) {
-		return 0;
-	}
-
-	/**
-	 * updateByPrimaryKey:. <br/>
-	 *
-	 * @author Hongbin Yuan
-	 * @param record
-	 * @return
-	 * @see net.yuanmomo.dao.mapper.UserMapper#updateByPrimaryKey(net.yuanmomo.dao.vo.User)
-	 */
-	@Override
-	public int updateByPrimaryKey(User record) {
-		return 0;
-	}
-
-	/**
-	 * userMapper.
-	 *
-	 * @param   userMapper    the userMapper to set
+	 * @param   userDAO    the userDAO to set
 	 * @since   JDK 1.6
 	 */
-	public void setUserMapper(UserMapper userMapper) {
-		this.userMapper = userMapper;
+	public void setUserDAO(UserDAO userDAO) {
+		this.userDAO = userDAO;
 	}
 }

@@ -1,9 +1,12 @@
 package net.yuanmomo.business;
 
-import net.yuanmomo.dao.proxy.UserImplProxy;
+import java.util.List;
+
 import net.yuanmomo.dao.vo.User;
 import net.yuanmomo.exception.BusinessException;
 import net.yuanmomo.exception.ValidationException;
+import net.yuanmomo.proxy.UserDAOProxy;
+import net.yuanmomo.proxy.UserMapperProxy;
 import net.yuanmomo.resource.ResourceParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +19,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserBusiness{
 	
 	@Autowired
-	private UserImplProxy userImplProxy=null;
+	private UserMapperProxy userImplProxy=null;
+	
+	@Autowired
+	private UserDAOProxy userDAOProxy=null;
 
 	/**
 	 * addUser: 插入一个用户. <br/>
@@ -28,7 +34,7 @@ public class UserBusiness{
 	 * @since JDK 1.6
 	 */
 	@Transactional(propagation=Propagation.REQUIRED,isolation =Isolation.REPEATABLE_READ, rollbackFor = Exception.class)
-	public boolean addUser(User user) throws ValidationException,BusinessException,Exception {
+	public boolean addUser(User user) throws ValidationException,BusinessException {
 		System.out.println("Business层，首先进行数据校验，感觉也行可以单独抽象为一个新的validation层。");
 		System.out.println("Business层然后处理业务逻辑，通过组合调用Proxy层中简单的业务逻辑来处理复杂的业务逻辑。");
 		
@@ -44,7 +50,7 @@ public class UserBusiness{
 		}
 		
 		// 判断用户名是否已经存在
-		User u = this.userImplProxy.getUser(user.getName());
+		User u = this.userDAOProxy.getUser(user.getName());
 		
 		if(u!=null){
 			throw new BusinessException(ResourceParam.BUSINESS_USER_NAME_EXISTS, "user.getName=" + user.getName());
@@ -53,12 +59,36 @@ public class UserBusiness{
 	}
 
 	/**
+	 * insertBatch: 批量插入用户. <br/>
+	 *
+	 * @author Hongbin Yuan
+	 * @param userList
+	 * @return
+	 * @throws BusinessException
+	 * @throws Exception
+	 * @since JDK 1.6
+	 */
+	public int insertBatch(List<User> userList)  throws BusinessException,Exception{
+		return this.userDAOProxy.insertBatch(userList);
+	}
+	
+	/**
 	 * userImplProxy.
 	 *
 	 * @param   userImplProxy    the userImplProxy to set
 	 * @since   JDK 1.6
 	 */
-	public void setUserImplProxy(UserImplProxy userImplProxy) {
+	public void setUserImplProxy(UserMapperProxy userImplProxy) {
 		this.userImplProxy = userImplProxy;
+	}
+
+	/**
+	 * userDAOProxy.
+	 *
+	 * @param   userDAOProxy    the userDAOProxy to set
+	 * @since   JDK 1.6
+	 */
+	public void setUserDAOProxy(UserDAOProxy userDAOProxy) {
+		this.userDAOProxy = userDAOProxy;
 	}
 }

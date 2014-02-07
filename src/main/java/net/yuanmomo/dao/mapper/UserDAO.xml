@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.yuanmomo.dao.mapper.UserDAO" >
+  <!-- insert   -->
+  <insert id="insertBatch" parameterType="list">
+    insert into user (name, age, birthday)
+    values 
+    <foreach collection="userList" item="user" index="index" separator=",">
+        (#{user.name,jdbcType=VARCHAR}, #{user.age,jdbcType=SMALLINT}, 
+        #{user.birthday,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
+  
+  <select id="getUserByName" resultMap="net.yuanmomo.dao.mapper.UserMapper.BaseResultMap"
+  	parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where name = #{userName,jdbcType=VARCHAR}
+  </select>
+</mapper>

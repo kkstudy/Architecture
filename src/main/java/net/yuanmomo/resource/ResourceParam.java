@@ -42,8 +42,13 @@ public class ResourceParam {
 	public static final String USER_REGISTER_SUCCESS="USER_REGISTER_SUCCESS";
 	public static final String USER_REGISTER_FAILED="USER_REGISTER_FAILED";
 	
+	/********************** MAPPER层异常对应描述 *****************************/
+	public static final String MAPPER_INSERT_EXCEPTION="MAPPER_INSERT_EXCEPTION";
+	public static final String MAPPER_SELECT_EXCEPTION = "MAPPER_SELECT_EXCEPTION";
+	
 	/********************** DAO层异常对应描述 *****************************/
-	public static final String DAO_INSERT_NONE_EXCEPTION="DAO_INSERT_NONE_EXCEPTION";
+	public static final String DAO_INSERT_BATCH_EXCEPTION="DAO_INSERT_BATCH_EXCEPTION";
+	public static final String DAO_SELECT_EXCEPTION="DAO_SELECT_EXCEPTION";
 	
 	/********************** Proxy层异常对应描述 *****************************/
 	public static final String PROXY_MULTI_OBJECT_FOUND="PROXY_MULTI_OBJECT_FOUND";
